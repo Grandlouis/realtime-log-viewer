@@ -43,6 +43,12 @@ const HomePage = ({ valFiles }) => {
         setCurrentFile(undefined);
     }
 
+    const colums = [{ title: 'Date', selector: 'date' }, { title: 'Log Entry', selector: 'log' }];
+    const parsedData = content.split('\n').filter(i => i).map(row => {
+        const [date, log] = row.replace('[', '').split('] ');
+        return { date: new Date(date).toLocaleString(), log };
+    });
+
     return (
         <WindowContainer
 
@@ -59,14 +65,14 @@ const HomePage = ({ valFiles }) => {
                             }
                         }))
                     }]} />}>
-                {!currentFile && <h2 className="list-group-header">Pick a file from the sidebar to begin</h2>}
+                {!currentFile && <h4 className="list-group-header">Pick a file from the sidebar to begin</h4>}
                 {currentFile && <main>
                     <h2 className="list-group-header" style={{ margin: '0 20px' }}>{currentFile} <Button onClick={closeCurrentFile}>X</Button></h2>
                     <hr />
                     <div ref={contentContainer} style={{ maxHeight: '85vh', overflow: 'auto' }}>
                         <Table
-                            columns={[{ title: 'Log Entry', selector: 'log' }]}
-                            data={content.split('\n').map(row => ({ log: row }))}
+                            columns={colums}
+                            data={parsedData}
                         />
                     </div>
                 </main>}
