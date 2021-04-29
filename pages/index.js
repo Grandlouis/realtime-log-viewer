@@ -60,7 +60,7 @@ const HomePage = ({ valFiles }) => {
                         }))
                     }]} />}>
                 {!currentFile && <h2 className="list-group-header">Pick a file from the sidebar to begin</h2>}
-                {currentFile && <div>
+                {currentFile && <main>
                     <h2 className="list-group-header" style={{ margin: '0 20px' }}>{currentFile} <Button onClick={closeCurrentFile}>X</Button></h2>
                     <hr />
                     <div ref={contentContainer} style={{ maxHeight: '85vh', overflow: 'auto' }}>
@@ -69,7 +69,7 @@ const HomePage = ({ valFiles }) => {
                             data={content.split('\n').map(row => ({ log: row }))}
                         />
                     </div>
-                </div>}
+                </main>}
             </SidebarLayout>
 
         </WindowContainer>
